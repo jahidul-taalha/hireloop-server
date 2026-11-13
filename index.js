@@ -34,8 +34,15 @@ app.get('/users', async (req, res) => {
     const cursor = users.find({});
     const result = await cursor.toArray();
     res.send(result);
-
 });
+
+//jobs related api 
+app.post('/jobs', async (req, res) => {
+  const job = req.body;
+  const result = await jobs.insertOne(job);
+  res.send(result);
+}
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
