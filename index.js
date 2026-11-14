@@ -36,12 +36,24 @@ app.get('/users', async (req, res) => {
     res.send(result);
 });
 
-//jobs related api 
+// Jobs related API
+app.get('/jobs', async (req, res)=>{
+  const cursor = jobs.find();
+  const result = await cursor.toArray();
+  res.send(result);
+})
+
 app.post('/jobs', async (req, res) => {
   const job = req.body;
   const result = await jobs.insertOne(job);
   res.send(result);
-}
+});
+
+app.delete('/jobs/:id', async (req, res) => {
+  const id = req.params.id;
+  const result = await jobs.deleteOne(query);
+  res.send(result);
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
